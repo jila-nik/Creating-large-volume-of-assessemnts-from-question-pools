@@ -1,0 +1,35 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amsthm, amssymb}
+ 
+\usepackage{multicol,pgf,tikz,import,ifthen,framed,aurical}
+\usetikzlibrary{math}
+\usepackage[margin=0.6in]{geometry}
+
+
+%Set True to see the solution.
+\newboolean{show}
+\setboolean{show}{false}
+
+
+\ifthenelse{\boolean{show}}{\newenvironment{sol}{\begin{framed}\color{teal} \underline{\bf \Large Solution}: \\ \Fontskrivan }{\color{black}\end{framed}\color{black}}}{\let\sol\comment \let\endsol\endcomment}
+
+
+\begin{document}
+\tikzmath{\k=5;\kone=1;\ktwo=2;\kthree=3;\kfour=4;
+\kfive=5;\ksix=1;\lone=1;\ltwo=1;\lthree=1;\lfour=1;\lfive=1;\lsix=0;}
+
+
+\foreach \n in {0,1,...,4}
+{\foreach \m in {0,1,...,4}
+{\tikzmath{\one=int(Mod(\n*\lone+\kone*\m,\k));\two=int(Mod(\n*\ltwo+\m*\ktwo,\k));\three=int(Mod(\n*\lthree+\m*\kthree,\k));\four=int(Mod(\n*\lfour+\m*\kfour,\k));\five=int(Mod(\n*\lfive+\m*\kfive,\k));\six=int(Mod(\n*\lsix+\m*\ksix,\k));}
+\input{Questions}
+}}
+
+
+{\bf All exams (each pair has exactly one question in common)}\\
+\noindent\foreach \n in {0,1,...,4}
+{\foreach \m in {0,1,...,4}
+{\tikzmath{\one=int(Mod(\n*\lone+\kone*\m,\k)+1);\two=int(Mod(\n*\ltwo+\m*\ktwo,\k)+1);\three=int(Mod(\n*\lthree+\m*\kthree,\k)+1);\four=int(Mod(\n*\lfour+\m*\kfour,\k)+1);\five=int(Mod(\n*\lfive+\m*\kfive,\k)+1);\six=int(Mod(\n*\lsix+\m*\ksix,\k)+1);}
+$\{Q_{1\one},Q_{2\two},Q_{3\three},Q_{4\four},Q_{5\five},Q_{6\six}\}$\\
+} ---------------------------- \\}
+\end{document}
