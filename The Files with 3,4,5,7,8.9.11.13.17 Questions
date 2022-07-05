@@ -1,0 +1,163 @@
+\documentclass[12pt]{article}
+\thispagestyle{empty}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[english]{babel}
+\usepackage{tabularx, verbatim, xcolor, graphicx, hyperref, multicol}
+\usepackage{pgf,tikz,import}
+
+\usetikzlibrary{math,arrows,patterns}
+\usepackage[margin=0.6in]{geometry}
+\usepackage{ifthen}
+\usepackage{tikzsymbols}
+\usepackage{tikz, pgfplots, pgffor}
+\usetikzlibrary{calc, math}
+\usepgfplotslibrary{polar}
+\pgfplotsset{compat=1.17}
+
+\newboolean{show}
+
+%What will show as solution.
+\ifthenelse{\boolean{show}}{\newenvironment{sol}{\begin{framed}\color{teal} \underline{\bf \Large Solution}: \\ \Fontskrivan }{\color{black}\end{framed}\color{black}}}{\let\sol\comment \let\endsol\endcomment}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Not currently being used header: 
+\newcommand{\pagehead}{\tikzmath{\diffe=int(\thepage-\thecz);}
+\ifthenelse{\diffe=0}{%
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.6pt}}
+\vskip 7pt
+{\bf \Large Name (in print):} \hskip 5cm {\bf \Large Lab Instructor: } 
+\vskip 5pt
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.6pt}}
+\vskip 5pt
+\addtocounter{cz}{1}}{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Currently being used header:
+\newcounter{ct}
+\setcounter{ct}{0}
+\newcounter{cz}
+\setcounter{cz}{0}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\huge\bf Instructor:\hspace{3cm}}
+\lhead{\huge\bf Name:}
+\rfoot{Page \thepage}
+\renewcommand{\headrulewidth}{2pt}
+%%Set TRUE to show the solution. Set False to Hide the Solution:
+\setboolean{show}{true}
+%%% Enter the learning goals' number starting with Gone in order. If less than eighteen goals, enter 0 for the rest.
+%%%%%%%%%%%%%%%%%%% k:Min Number of Questions in each pool: So far, we can do 3,4,5,7,8,9,11,13,17
+%%%%%%%%%%%%%%%%%%% N:Number of different exams N can, AT MOST, be k^2+1.
+%%%%%%%%%%%%%%%%%%% M:Number of learning Goals
+\tikzmath{\k=8;\N=49; \M=5; \num=int(\N+1);}
+%%%%%%%%%%%%%%%%%%% Gone: first learning goal 
+%%%%%%%%%%%%%%%%%%% Gtwo:Second Learning goal
+%%%%%%%%%%%%%%%%%%% Gthree:Third Learning goal
+%%%%%%%%%%%%%%%%%%% Gfour:Fourth Learning goal
+%%%%%%%%%%%%%%%%%%% Gfive:Five Learning goal
+%%%%%%%%%%%%%%%%%%% Gsix:Six Learning goal
+%%%%%%%%%%%%%%%%%%% Gseven:Seven Learning goal
+%%%%%%%%%%%%%%%%%%% Geight:Eight Learning goal
+%%%%%%%%%%%%%%%%%%% Gnine:Nine Learning goal
+%%%%%%%%%%%%%%%%%%% Gten:Ten Learning goal
+\tikzmath{\Gone=16;\Gtwo=17;\Gthree=18;\Gfour=19;\Gfive=20;\Gsix=38;\Gseven=39;\Geight=38;\Gnine=45;\Gten=37;\Geleven=38;\Gtwelve=39;\Gthirteen=40;\Gfourteen=41;\Gfifteen=42;\Gsixteen=43;\Gseventeen=44;\Geighteen=45;}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%Initializing the values%%%%%%%
+\tikzmath{\kone=1;\ktwo=2;\kthree=3;\kfour=4;
+\kfive=5;\ksix=6;\kseven=7;\keight=8;\knine=9;\kten=10;\keleven=11;\ktwelve=12;\kthirteen=13;\kfourteen=14;\kfifteen=15;\ksixteen=16;\kseventeen=17;\keighteen=1;}
+\tikzmath{\lone=1;\ltwo=1;\lthree=1;\lfour=1;\lfive=1;\lsix=1;\lseven=1;\leight=1;\lnine=1;\lten=1;\leleven=1;\ltwelve=1;\lthirteen=1;\lfourteen=1;\lfifteen=1;\lsixteen=1;\lseventeen=1; \leighteen=1;}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Some Values for all%%%%%%%% 
+\tikzmath{\LearningGoal="LearningGoal";\LG="LG";\Q="Q";}
+\tikzmath{\kminus=int(\k-1);\m=1;}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifthenelse{\k=3 \OR \k=5 \OR \k=7 \OR \k=11 \OR \k=13 \OR \k=17}{
+\tikzmath{\pool="0,1,...,\kminus";\vari="\m";}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Addition Functions
+\newcommand{\addpair}[2]{Mod((#1)+(#2),\k)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifthenelse{\k=3}{\tikzmath{\lfour=0;}}{
+\ifthenelse{\k=5}{\tikzmath{\lsix=0;}}{
+\ifthenelse{\k=7}{\tikzmath{\leight=0;}}{
+\ifthenelse{\k=11}{\tikzmath{\ltwelve=0;}}{
+\ifthenelse{\k=13}{\tikzmath{\lfourteen=0;}}{
+\ifthenelse{\k=17}{\tikzmath{\leighteen=0;}}{This is not working!
+}}}}}}}{
+\ifthenelse{\k=9}{
+\tikzmath{\m=1;\lten=0;}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Addition Functions
+\tikzmath{\nh=3;}
+\newcommand{\addpair}[2]{Mod(((#1)+(#2)),\nh)+Mod((int((#1)/\nh)+int((#2)/\nh))*\nh,\k)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzmath{\pool="0/1/2/3/4/5/6/7/8/1,0/0/0/0/0/0/0/0/0/0,0/2/1/6/8/7/3/5/4/2,0/3/6/2/5/8/1/4/7/3,0/4/8/5/6/1/7/2/3/4,0/5/7/8/1/3/4/6/2/1,0/6/3/1/7/4/2/8/5/5,0/7/5/4/2/6/8/3/1/7,0/8/4/7/3/2/5/1/6/8"; \vari="\kone/\ktwo/\kthree/\kfour/
+\kfive/\ksix/\kseven/\keight/\knine/\kten";}}{
+\ifthenelse{\k=4}{\tikzmath{\m=1;\lfour=0;}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Addition Functions
+\tikzmath{\nh=2;}
+\newcommand{\addpair}[2]{Mod(((#1)+(#2)),\nh)+Mod((int((#1)/\nh)+int((#2)/\nh))*\nh,\k)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzmath{\pool="0/0/0/0/0,0/1/2/3/1,0/2/3/1/2,0/3/1/2/3"; \vari="\kone/\ktwo/\kthree/\kfour/
+\kfive";}}{
+\ifthenelse{\k=8}{\tikzmath{\m=1;\lnine=0;}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Addition Functions
+\tikzmath{\nh=2;}
+\newcommand{\addpair}[2]{Mod(((#1)+(#2)),\nh)+Mod((-1)^(int(#1/2)*int(#2/2))*(int((#1)/\nh)+(-1)^(int(#1/2)*int(#2/2))*int((#2)/\nh))*\nh,\k)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\tikzmath{\pool=" 0/0/0/0/0/0/0/0/0,1/0/1/2/3/4/5/6/7,2/0/2/4/6/3/1/7/5,3/0/3/6/5/7/4/1/2,4/0/4/3/7/6/2/5/1,5/0/5/1/4/2/7/3/6,6/0/6/7/1/5/3/2/4,7/0/7/5/2/1/6/4/3";}
+\tikzmath{\vari="\kone/\ktwo/\kthree/\kfour/
+\kfive/\ksix/\kseven/\keight/\knine";}
+}{This is not working!}}
+}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.6pt}}
+\vskip 7pt
+{\bf \Large Name (in print):} \hskip 5cm {\bf \Large Lab Instructor: } 
+\vskip 5pt
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.6pt}}
+\vskip 5pt
+\noindent\foreach \vari in \pool 
+{\foreach \n in {0,1,...,\kminus} 
+{\tikzmath{\one=int(\addpair{(\n*\lone)}{(\kone*\m)}+1);\two=int(\addpair{(\n*\ltwo)}{(\m*\ktwo)}+1);\three=int(\addpair{(\n*\lthree)}{(\m*\kthree)}+1);\four=int(\addpair{(\n*\lfour)}{(\m*\kfour)}+1);\five=int(\addpair{(\n*\lfive)}{(\m*\kfive)}+1);\six=int(\addpair{(\n*\lsix)}{(\m*\ksix)}+1);\seven=int(\addpair{(\n*\lseven)}{(\m*\kseven)}+1);\eight=int(\addpair{(\n*\leight)}{(\m*\keight)}+1);\nine=int(\addpair{(\n*\lnine)}{(\m*\knine)}+1);\ten=int(\addpair{(\n*\lten)}{(\m*\kten)}+1);}\tikzmath{\eleven=int(\addpair{(\n*\leleven)}{(\m*\keleven)}+1);}\tikzmath{\twelve=int(Mod(\n*\ltwelve+\m*\ktwelve,\k)+1);}\tikzmath{\thirteen=int(\addpair{(\n*\lthirteen)}{(\m*\kthirteen)}+1);}\tikzmath{\efourteen=int(\addpair{(\n*\lfourteen)}{(\m*\kfourteen)}+1);}\tikzmath{\efifteen=int(\addpair{(\n*\lfifteen)}{(\m*\keleven)}+1);}\tikzmath{\sixteen=int(\addpair{(\n*\lsixteen)}{(\m*\ksixteen)}+1);}\tikzmath{\seventeen=int(\addpair{(\n*\lseventeen)}{(\m*\kseventeen)}+1);}\tikzmath{\eighteen=int(\addpair{(\n*\leighteen)}{(\m*\keighteen)}+1);}
+\addtocounter{ct}{1}
+\ifthenelse{\thect<\num}{
+%\clearpage
+\setcounter{cz}{0}
+\setcounter{page}{1}
+\ifthenelse{\M=1}{\foreach \o/\p in {\Gone/\one}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=2}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=3}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=4}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=5}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=6}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=7}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=8}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=9}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{\ifthenelse{\M=10}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=11}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=12}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven,\Gtweleve/\twelve}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=13}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven,\Gtweleve/\twelve,\Gthirteen/\thirteen}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=14}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven,\Gtweleve/\twelve,\Gthirteen/\thirteen,\Gfourteen/\fourteen}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=15}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven,\Gtweleve/\twelve,\Gthirteen/\thirteen,\Gfourteen/\fourteen,\Gfifteen/\fifteen}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=16}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven,\Gtweleve/\twelve,\Gthirteen/\thirteen,\Gfourteen/\fourteen,\Gfifteen/\fifteen,\Gsixteen/\sixteen}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=17}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven,\Gtweleve/\twelve,\Gthirteen/\thirteen,\Gfourteen/\fourteen,\Gfifteen/\fifteen,\Gsixteen/\sixteen,\Gseventeen/\seventeen}
+{\input{\LearningGoal\o/\LG\o\Q\p}}}{
+\ifthenelse{\M=18}{\foreach \o/\p in {\Gone/\one,\Gtwo/\two,\Gthree/\three,\Gfour/\four,\Gfive/\five,\Gsix/\six,\Gseven/\seven,\Geight/\eight,\Gnine/\nine,\Gten/\ten,\Geleven/\eleven,\Gtweleve/\twelve,\Gthirteen/\thirteen,\Gfourteen/\fourteen,\Gfifteen/\fifteen,\Gsixteen/\sixteen,\Gseventeen/\seventeen,\Geighteen/\eighteen}
+{\tikzmath{\diffe=int(\thepage-\thecz);}
+\ifthenelse{\diffe=0}{}{\addtocounter{cz}{1}\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.6pt}}
+\vskip 7pt
+{\bf \Large Name (in print):} \hskip 5cm {\bf \Large Lab Instructor: } 
+\vskip 5pt
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{0.6pt}}
+\vskip 5pt}{}
+\input{\LearningGoal\o/\LG\o\Q\p}}}{
+}}}}}}}}}}}}}}}}}}
+\pagebreak
+}{}}}
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
