@@ -52,12 +52,12 @@
 %%%%%%%%%%%%%%%%%%% Gtwo:Second Learning goal
 %%%%%%%%%%%%%%%%%%% Gthree:Third Learning goal
 %%%%%%%%%%%%%%%%%%% Gfour:Fourth Learning goal
-%%%%%%%%%%%%%%%%%%% Gfive:Five Learning goal
-%%%%%%%%%%%%%%%%%%% Gsix:Six Learning goal
-%%%%%%%%%%%%%%%%%%% Gseven:Seven Learning goal
+%%%%%%%%%%%%%%%%%%% Gfive:Fifth Learning goal
+%%%%%%%%%%%%%%%%%%% Gsix:Sixth Learning goal
+%%%%%%%%%%%%%%%%%%% Gseven:Seventh Learning goal
 %%%%%%%%%%%%%%%%%%% Geight:Eight Learning goal
-%%%%%%%%%%%%%%%%%%% Gnine:Nine Learning goal
-%%%%%%%%%%%%%%%%%%% Gten:Ten Learning goal
+%%%%%%%%%%%%%%%%%%% Gnine:Nineth Learning goal
+%%%%%%%%%%%%%%%%%%% Gten:Tenth Learning goal
 \tikzmath{\Gone=16;\Gtwo=17;\Gthree=18;\Gfour=19;\Gfive=20;\Gsix=38;\Gseven=39;\Geight=38;\Gnine=45;\Gten=37;\Geleven=38;\Gtwelve=39;\Gthirteen=40;\Gfourteen=41;\Gfifteen=42;\Gsixteen=43;\Gseventeen=44;\Geighteen=45;}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%Initializing the values%%%%%%%
