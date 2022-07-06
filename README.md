@@ -11,3 +11,5 @@ In each folder LearningGoalx, create LaTex files name LGxQn for each question, w
 <strong>Arrays for 1 or 2 Questions in Common Python File:</strong><br>
 If checking=False, for n=4,5,7,8,9,11,13,17 create arrays for each assessment variants that has c=1,2 questions in common.<br>
 If checking=True, for n=4,5,7,8,9,11,13,17 create arrays for each assessment variants and verifies that there are at most c=1,2 many questions in common.<br>
+<strong>Arrays for 3 Questions in Common Python File:</strong><br>
+This has the same property as the one for for 1 or 2 questions in common.
