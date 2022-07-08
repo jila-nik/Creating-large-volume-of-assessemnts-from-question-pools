@@ -13,5 +13,5 @@ If checking=False, for n=4,5,7,8,9,11,13,17 create arrays for each assessment va
 If checking=True, for n=4,5,7,8,9,11,13,17 create arrays for each assessment variants and verifies that there are at most c=1,2 many questions in common.<br>
 <strong>Finding Arrays for 3 Questions in Common Python File:</strong><br>
 This has the same property as the one for for 1 or 2 questions in common.<br>
-<strong>All arrays Excel File:</strong>
+<strong>All Arrays Pools for cq equals to 1 or 2 Excel File:</strong>
 A worksheet containing sheets of results of the Python code for cq=1 and cq=2
