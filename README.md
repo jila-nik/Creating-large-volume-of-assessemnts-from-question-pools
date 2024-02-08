@@ -15,3 +15,5 @@ If checking=True, for n=4,5,7,8,9,11,13,17 create arrays for each assessment var
 This has the same property as the one for for 1 or 2 questions in common.<br>
 <strong>All Arrays for Pools cq equals to 1 or 2 Excel File:</strong><br>
 A worksheet containing sheets of results of the Python code for cq=1 and cq=2
+
+This project is related to this paper: https://people.ku.edu/~jila/Applying_Combinatorics_Preprint.pdf
