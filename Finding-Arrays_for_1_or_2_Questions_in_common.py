@@ -174,7 +174,7 @@ elif n==9:
           genelem.append(gen[m])         
         rows.append(genelem)      
 else:
-  print("You entered the wrong number.")   
+  print("You entered a wrong number.")   
 
 df = pd.DataFrame(rows, columns=cols)
 with pd.option_context('display.max_rows', None,'display.max_columns', None,'display.precision', 3):
