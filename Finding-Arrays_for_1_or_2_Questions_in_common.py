@@ -202,10 +202,10 @@ if checking==True:
         oktwo=oktwo+1
       else:  
         pairerror=pairerror+1
-  if c==1:           
-    print("We checked a set of size ", ct," of assessment variants.")  
+  if c==1:
+    print("A set of size ", ct," of assessment variants was created and we checked ",int(ct*(ct-1)/2),"pairs of aseessment variants.")
   elif c==2:
-    print("We checked the entire ", ct," assessment variants.")       
+    print("A set of size ", ct," of assessment variants was created and we checked ",int(ct*(ct-1)/2),"pairs of aseessment variants.")      
     print("Pairs with 0 common questions:",okzero,"--Pairs with 1 common question:",okone,"--Pairs with 2 common questions:",oktwo,"--Pairs with more than 2 common questions:",pairerror)
   if c==1:
     print("Total number of pairs with strictly less that 2 questions in common:",okzero+okone)
