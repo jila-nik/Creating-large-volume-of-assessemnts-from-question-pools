@@ -4,7 +4,7 @@ import os
 import openpyxl
 import math
 # This code pints vectors for a vector subspace of size min(NumberofVariantsinPools^2,2001) (when NumberofQuestionsInCommon=1) or min(NumberofVariantsinPools^3,2001) (when NumberofQuestionsInCommon=2) subset of GF(NumberofVariantsinPools)^30. 
-#It also creates a data frame df where each row is a vector in GF(NumberofVariantsinPools)^{NumberofVariantsinPools+1}. If checking is set to be true, the program also checks that that each pair of vectors in the data frame has at most NNumberofQuestionsInCommon questions in common.
+# It also creates a data frame df where each row is a vector in GF(NumberofVariantsinPools)^{NumberofVariantsinPools+1}. If checking is set to be true, the program also checks that that each pair of vectors in the data frame has at most NNumberofQuestionsInCommon questions in common.
 # The vector subspaces in GF(NumberofVariantsinPools)^{NumberofVariantsinPools+1} GF(NumberofVariantsinPools)^{NumberofVariantsinPools+2]GF(NumberofVariantsinPools)^{NumberofVariantsinPools+2} are the same as in the article https://www.tandfonline.com/doi/pdf/10.1080/0020739X.2023.2236612. 
 # Each printed vector is contanicated copies of a vector in GF(NumberofVariantsinPools)^{NumberofVariantsinPools+1} or GF(NumberofVariantsinPools)^{NumberofVariantsinPools+2}.  
 #########################################################################################
